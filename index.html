@@ -1,0 +1,199 @@
+<html>
+<head>
+<style>
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+/* Styles */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans";
+  font-size: 14px;
+}
+.heading{
+  background-color: #3b5998;
+  background-image: linear-gradient(#4e69a2, #3b5998 50%);
+  border-bottom: 1px solid #133783;
+  min-height: 42px;
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  padding: 13px;
+  display: flex;
+  justify-content: space-around;
+  color: white;
+}
+.gender_wrapper{
+  display: flex;
+
+}
+.log_button{
+  border-color: #29487d;
+  background-color: #4267b2;
+}
+.container{
+  background: #cbcdcf;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+form {
+  padding: 20px;
+  color: black;
+}
+form label,
+form input{
+  border: 0;
+
+  margin-bottom: 3px;
+  display: block;
+  width: 50%;
+}
+form input {
+  height: 25px;
+  line-height: 25px;
+  background: #fff;
+  color: #000;
+  padding: 0 6px;
+  box-sizing: border-box;
+}
+
+form .error {
+  color: #ff0000;
+}
+
+.article-reference {
+  margin-top: 15px;
+}
+.article-reference a {
+  color: #e67e22;
+}
+footer {
+  width: 75%;
+  margin: 0 auto;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script>
+// Wait for the DOM to be ready
+$(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $("form[name='registration']").validate({
+    // Specify validation rules
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      firstname: "required",
+      lastname: "required",
+      booking: "required",
+      email: {
+        required: true,
+        // Specify that email should be validated
+        // by the built-in "email" rule
+        email: true
+      },
+      password: {
+        required: true,
+        minlength: 5
+      },
+      Gender:{
+        required:true,
+      }
+
+    },
+    // Specify validation error messages
+    messages: {
+      firstname: "Please enter your firstname",
+      lastname: "Please enter your lastname",
+      booking: "Please enter your birthdate",
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 5 characters long"
+      },
+      email: "Please enter a valid email address",
+      Gender: "Please select any one option",
+    },
+    errorPlacement: function(error, element) 
+        {
+            if ( element.is(":radio") ) 
+            {
+                error.appendTo( element.parents('.gender_wrapper') );
+            }
+            else 
+            { // This is the default behavior 
+                error.insertAfter( element );
+            }
+         },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
+});
+
+
+</script>
+</head>
+
+<body>
+  <div class="heading">
+    <div ><h1>formbook</h1></div>
+    <div >
+      <label for="log" class="log_button">
+        <input value="Log In to Existing Account" type="submit">
+      </label>
+    </div>
+  </div>   
+  <div class="container">
+    <h2>Create a new account</h2>
+    <h3>Its quick and easy</h3>
+    <form id="form" method="post" action="" name="registration">
+
+      <input type="text" name="firstname" id="firstname" placeholder="First name"/>
+
+      <input type="text" name="lastname" id="lastname" placeholder="Last name"/>
+      
+      <input type="email" name="email" id="email" placeholder="Mobile number or Email address"/>
+
+      <input type="password" name="password" id="password" placeholder="New password"/>
+
+      <label for="booking">Date of birth</label>
+      <input type="date" id="booking" name="booking">
+      <div >
+        <div>Gender</div>
+        <span class="gender_wrapper">
+          <input type="radio" id="male" name="Gender" value="male">
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="Gender" value="female">
+          <label for="female">Female</label>
+          <input type="radio" id="other" name="Gender" value="other">
+          <label for="other">Custom</label>
+        </span>
+      </div>
+      <p class="terms_and_condition">
+        "By clicking Sign Up, you agree to our"
+        <a href="#term">Terms</a>
+        ","
+        <a href="#data_policy">Data Policy</a>
+        "and"
+        <a href="#privacy">Cookie Policy</a>
+        ". You may receive SMS notifications from us and can opt out at any time."
+      </p>
+      
+      <button type="submit" class="btn btn-success">Sign Up</button>
+
+    </form>
+  </div>
+  <footer><h6>Engish Hindi Arabic Chinese Spanish Javanese German Korean French Telugu Turkish Tamil Urdu</h6> </footer>
+</body>
+</html>
